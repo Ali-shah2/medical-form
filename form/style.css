@@ -196,7 +196,7 @@
         transform: scale(0.2);
         opacity: 0.2;
     }
-    
+
     50% {
         transform: scale(1.0);
         opacity: 0.5;
@@ -210,8 +210,8 @@
 }
 
 
-  
-.header-right-call-num-text{
+
+.header-right-call-num-text {
     font-size: 20px;
     white-space: nowrap;
     align-items: center;
@@ -220,13 +220,13 @@
 
 }
 
-.header-right-call-num{
+.header-right-call-num {
     letter-spacing: -.05em;
     font-weight: 700;
 
 }
 
-.header-right-call-text{
+.header-right-call-text {
     font-weight: 500;
     padding-left: 3px;
 }
@@ -253,6 +253,21 @@
     margin-right: 10px;
     position: absolute;
 } */
+
+
+.container {
+    min-width: 640px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 30px;
+    border-radius: 0px;
+    border: none;
+    padding: 10px 20px;
+}
+
+
+
 
 
 /* For the function */
@@ -297,6 +312,7 @@
 
 }
 
+/* 
 fieldset {
     min-width: 640px;
     display: flex;
@@ -306,7 +322,7 @@ fieldset {
     border-radius: 0px;
     border: none;
     padding: 10px 20px ;
-}
+} */
 
 input {
     display: block;
@@ -325,43 +341,12 @@ input[type="email"] {
 }
 
 
-/* .content-text {
-    font-size: 20px;
-} */
-
-
-
-/* input[type="text"]:focus,
-input[type="email"]:focus {
-    opacity: 0.5;
-}
-
-input[type="button"],
-input[type="submit"] {
-    margin-top: 20px !important;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    padding: 15px !important;
-    line-height: 0px;
-    background-color: #fff;
-    transition: all 150ms;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 5px;
-} */
-/* 
-input[type="button"]:hover,
-input[type="submit"]:hover {
-    color: rgb((185 28 28 / var(--tw-bg-opacity))); 
-     color: white;
-} */
-
 h2 {
     text-align: center;
     font-size: 22px;
     font-family: opensans;
     font-weight: 400;
     display: block;
-    /* margin-bottom: 25px !important; */
 }
 
 
@@ -370,7 +355,6 @@ h2 {
 }
 
 
-/* svg logo  */
 
 .svg-logo {
     --tw-text-opacity: 1;
@@ -388,7 +372,7 @@ svg {
     text-align: center;
 }
 
-.blue{
+.blue {
     color: #1e40af;
 }
 
@@ -583,6 +567,9 @@ a {
 .text-toll {
     margin-top: 1rem;
 }
+
+
+
 
 
 /* input[type="text"]{
