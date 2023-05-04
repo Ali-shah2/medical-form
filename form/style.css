@@ -52,11 +52,6 @@
     color: #1e40af
 }
 
-/* .header-main-left-logo>:not([hidden])~:not([hidden]) {
-    --tw-space-x-reverse: 0;
-    margin-right: calc(8px * var(--tw-space-x-reverse));
-    margin-left: calc(8px * calc(1 - var(--tw-space-x-reverse)));
-} */
 
 .link-header-main-right {
     float: right;
@@ -66,16 +61,6 @@
     text-decoration: inherit;
 }
 
-
-/* @media (min-width: 768px) {
-    .hidden-block {
-        display: block;
-    }
-}
-
-.hidden-block {
-    display: none;
-} */
 
 .header-main-left-text {
     font-weight: 600;
@@ -223,7 +208,7 @@
 .header-right-call-num {
     letter-spacing: -.05em;
     font-weight: 700;
-
+    
 }
 
 .header-right-call-text {
@@ -231,62 +216,9 @@
     padding-left: 3px;
 }
 
-/* .header-right-call-blinker {
-    --tw-bg-opacity: 1;
-    background-color: rgb(74 222 128 / var(--tw-bg-opacity));
-    border-radius: 9999px;
-    width: 8px;
-    height: 8px;
-    margin-right: 10px;
-}
+/* HEADER ENDS */
 
-
-.header-right-call-blinker-animate {
-    --tw-bg-opacity: 1;
-    background-color: rgb(74 222 128 / var(--tw-bg-opacity));
-    border-radius: 9999px;
-    -webkit-animation: ping 1s cubic-bezier(0, 0, .2, 1) infinite;
-    animation: ping 1s cubic-bezier(0, 0, .2, 1) infinite;
-
-    width: 8px;
-    height: 8px;
-    margin-right: 10px;
-    position: absolute;
-} */
-
-
-.container {
-    min-width: 640px;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 30px;
-    border-radius: 0px;
-    border: none;
-    padding: 10px 20px;
-}
-
-
-
-
-
-/* For the function */
-.msf_hide {
-    display: none;
-}
-
-.msf_show {
-    display: block;
-}
-
-
-/* Just for decoration */
-/* body {
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-} */
-
+/*WHOLE FORM CSS */
 .form {
     background-color: #fff;
     display: flex;
@@ -294,11 +226,9 @@
 }
 
 .form_wrapper {
-    /* min-width: 640px; */
     position: absolute;
     top: 50%;
     margin-top: -160px;
-    /* margin-left: 20%; */
     max-width: 448px;
     width: 100%;
     padding-top: 1.5rem;
@@ -324,18 +254,6 @@
 }
 
 
-/* 
-fieldset {
-    min-width: 640px;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 30px;
-    border-radius: 0px;
-    border: none;
-    padding: 10px 20px ;
-} */
-
 input {
     display: block;
     width: 100%;
@@ -346,9 +264,6 @@ input[type="text"],
 input[type="email"] {
     outline: none;
     border: none;
-    /* background-color: lightgrey; */
-    /* padding: 5px 0px !important; */
-    /* text-align: center; */
     transition: all 250ms;
 }
 
@@ -402,7 +317,7 @@ svg {
     margin-bottom: 4px;
 }
 
-/* main form css */
+/* Main Form CSS */
 
 .main-form {
     flex-direction: column;
@@ -415,8 +330,6 @@ svg {
 
 .option-button {
     padding: 15px !important;
-    /* margin-top: 20px !important; */
-
     --tw-bg-opacity: 1;
     background-color: rgb(220 38 38 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
@@ -433,8 +346,6 @@ svg {
     border-radius: 4px;
     align-items: center;
     cursor: pointer;
-    /* display: inline-flex; */
-    /* position: relative; */
 
 }
 
@@ -489,6 +400,30 @@ button {
     font-size: 13px;
     opacity: 1;
 }
+/* MID-FORM CONTAINER  */
+.container {
+    min-width: 640px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 30px;
+    border-radius: 0px;
+    border: none;
+    padding: 10px 20px;
+}
+
+
+/* HIDE AND SHOW FIELDSET */
+.msf_hide {
+    display: none;
+}
+
+.msf_show {
+    display: block;
+}
+
+
+
 
 
 /* last form bold css */
@@ -579,26 +514,3 @@ a {
 .text-toll {
     margin-top: 1rem;
 }
-
-
-
-
-
-/* input[type="text"]{
-    padding-left: 10px;
-    box-sizing: border-box;
-}
- */
-
-
-/* 
-[type=text]:focus{
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    --tw-ring-inset: var(--tw-empty, );
-    --tw-ring-offset-width: 0px;
-    --tw-ring-offset-color: #fff;
-    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-    box-shadow: var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow);
-} */
