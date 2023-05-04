@@ -149,16 +149,14 @@ c0.2-1.5,0.7-3,1.6-4.3c0.6-1,1.3-1.8,2.2-2.6c0,0,0.1-0.1,0.1-0.1c-1.5,0.6-2.8,1.
     </nav>
 
 
-
-
     <div class="form"></div>
     <main class="flex-1 mt-24 min-h-screen py-8 md:py-16">
         <div class="max-w-5xl w-full mx-auto sm:px-6 lg:px-8 h-full">
             <div class="px-4 h-full">
-                <div class="form_wrapper">
+                <div class="form_wrapper form_center">
                     <!-- form 0 text and form -->
                     <fieldset class="msf_hide">
-                        <div class="flex flex-col rounded-lg relative">
+                        <div id="remove-class" class="flex flex-col rounded-lg relative">
                             <div class="flex flex-col space-y-8 z-10 rounded-lg">
                                 <div class="text-2xl max-w-md">
                                     <p>Are you shopping for Medicare Insurance plans? A licensed insurance agent can
@@ -345,12 +343,12 @@ c0.2-1.5,0.7-3,1.6-4.3c0.6-1,1.3-1.8,2.2-2.6c0,0,0.1-0.1,0.1-0.1c-1.5,0.6-2.8,1.
                             <!-- making the label float at the top of the input placeholder -->
 
                             <div class="user-input-wrp">
-                                <input type="text" class="inputText" inputmode="text" required />
+                                <input type="text" class="inputText" id="first_name" inputmode="text" required />
                                 <span class="floating-label">First Name</span>
                             </div>
 
                             <div class="user-input-wrp">
-                                <input type="text" class="inputText" inputmode="text" required />
+                                <input type="text" class="inputText" id="last_name" inputmode="text" required />
                                 <span class="floating-label">Last Name</span>
                             </div>
 
@@ -431,12 +429,12 @@ c0.2-1.5,0.7-3,1.6-4.3c0.6-1,1.3-1.8,2.2-2.6c0,0,0.1-0.1,0.1-0.1c-1.5,0.6-2.8,1.
                             </div>
 
                             <div class="user-input-wrp">
-                                <input type="text" class="inputText" inputmode="address" required />
+                                <input type="text" class="inputText" id="res_address" inputmode="address" required />
                                 <span class="floating-label">Enter Your Street Address (Optional) </span>
                             </div>
 
                             <div class="user-input-wrp">
-                                <input type="text" class="inputText" inputmode="text" required />
+                                <input type="text" class="inputText" id="zip_address" inputmode="text" required />
                                 <span class="floating-label">Enter Your Zip (Optional) </span>
                             </div>
 
@@ -518,7 +516,7 @@ c0.2-1.5,0.7-3,1.6-4.3c0.6-1,1.3-1.8,2.2-2.6c0,0,0.1-0.1,0.1-0.1c-1.5,0.6-2.8,1.
                             </div>
                             <!-- forth form main starts -->
                             <div class="user-input-wrp">
-                                <input type="text" class="inputText" inputmode="email" required />
+                                <input type="text" class="inputText" id="email" inputmode="email" required />
                                 <span class="floating-label">Enter Your Email (Optional) </span>
                             </div>
 
@@ -605,9 +603,10 @@ c0.2-1.5,0.7-3,1.6-4.3c0.6-1,1.3-1.8,2.2-2.6c0,0,0.1-0.1,0.1-0.1c-1.5,0.6-2.8,1.
                             </div>
                             <!-- fifth form main start -->
                             <div class="user-input-wrp">
-                                <input type="text" class="inputText" inputmode="numeric" required />
+                                <input type="text" class="inputText" id="number" inputmode="numeric" required />
                                 <span class="floating-label">Phone Number </span>
                             </div>
+
 
                             <input class="option-button" type="button" name="next" value="Continue &#8594;"
                                 onclick="msf_btn_next()">
@@ -647,13 +646,13 @@ c0.2-1.5,0.7-3,1.6-4.3c0.6-1,1.3-1.8,2.2-2.6c0,0,0.1-0.1,0.1-0.1c-1.5,0.6-2.8,1.
                     </fieldset>
 
 
-                    <!-- three loading screen with icons  -->
-                    <fieldset>
+                    <!-- sixth form with loading screen with three icons -->
+                    <fieldset id="loader-field" class="msf_hide">
                         <!-- loading screen -->
                         <div class="px-4 h-full">
 
 
-                            <div class="flex justify-center items-center -mt-16">
+                            <div class="flex justify-center items-center mt-16">
                                 <nav aria-label="progress">
                                     <ol role="list">
                                         <li class="relative pb-10">
@@ -752,7 +751,76 @@ c0.2-1.5,0.7-3,1.6-4.3c0.6-1,1.3-1.8,2.2-2.6c0,0,0.1-0.1,0.1-0.1c-1.5,0.6-2.8,1.
                             </div>
                         </div>
 
-                        <script src="loader.js"></script>
+                        <!-- select data to send -->
+                        <!-- Getting all the field input and sending it -->
+                        <script>
+
+                            function sendData() {
+                                const info = {};
+                                const first_name = document.getElementById("first_name").value;
+                                const last_name = document.getElementById("last_name").value;
+                                const res_address = document.getElementById("res_address").value;
+                                const zip_address = document.getElementById("zip_address").value;
+                                const email = document.getElementById("email").value;
+                                const number = document.getElementById("number").value;
+
+                                info.first_name = first_name;
+                                info.last_name = last_name;
+                                info.res_address = res_address;
+                                info.zip_address = zip_address;
+                                info.email = email;
+                                info.number = number;
+                                console.log(info);
+
+                                // Create a new XMLHttpRequest object
+                                const xhr = new XMLHttpRequest();
+
+                                // Define the PHP script URL and HTTP method
+                                const url = "form_submit.php";
+                                const method = "POST";
+
+                                // Define the data to be sent to the PHP script
+                                const data = JSON.stringify(info);
+
+                                // Open the XMLHttpRequest with the method and URL
+                                xhr.open(method, url, true);
+
+                                // Set the Content-Type header to JSON
+                                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                                // Send the data to the PHP script
+                                xhr.send(data);
+                            }
+
+                        </script>
+
+                        <!-- Loading the 2nd last form of loading screen -->
+                        <script>
+
+                            // Get the loader field element
+                            const loaderField = document.getElementById("loader-field");
+
+                            // Create a new observer instance
+                            const observer = new MutationObserver((mutationsList) => {
+                                // Loop through all mutations
+                                for (let mutation of mutationsList) {
+                                    // Check if the class name changed
+                                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                                        const classList = mutation.target.classList;
+                                        if (classList.contains('msf_show') && !classList.contains('msf_hide')) {
+                                            // The class has changed to msf_show
+                                            changeLoadIconColor()
+                                                .then(sendData)
+                                                .then(msf_btn_next);
+                                        }
+                                    }
+                                }
+                            });
+
+                            // Start observing the loader field element
+                            observer.observe(loaderField, { attributes: true });
+
+                        </script>
                     </fieldset>
 
 
@@ -810,14 +878,1092 @@ c0.2-1.5,0.7-3,1.6-4.3c0.6-1,1.3-1.8,2.2-2.6c0,0,0.1-0.1,0.1-0.1c-1.5,0.6-2.8,1.
         <div class="max-w-7xl mx-auto px-4 overflow-hidden">
             <div class="flex flex-col md:flex-row items-center justify-between">
                 <nav class="flex" aria-label="Footer">
-                    <div class="cursor-pointer text-gray-500 hover:text-gray-900 px-2 md:px-5 py-2">Privacy Policy
+                    <div id="nav-item-1" class="cursor-pointer text-gray-500 hover:text-gray-900 px-2 md:px-5 py-2">
+                        Privacy Policy
+                    </div>
+
+                    <!-- popup modal 1 html -->
+                    <div id="modal-1" class="modal">
+                        <div class="fixed z-10 inset-0 overflow-y-auto">
+                            <div
+                                class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                <div class="fixed inset-0 transition-opacity">
+                                    <div class="absolute inset-0 bg-black opacity-75"></div>
+                                    <div class="close fixed top-0 right-0 p-3">
+                                        <div class="p-3 cursor-pointer rounded-full transition ease-in-out duration-150 hover:bg-gray-800">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                                                class="w-6 h-6 text-gray-200 iconify iconify--mdi" width="1em"
+                                                height="1em" viewBox="0 0 24 24">
+                                                <path fill="currentColor"
+                                                    d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div><span class="hidden sm:inline-block sm:align-middle sm:h-screen">&nbsp;</span>
+                                <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:p-6 sm:max-w-4xl"
+                                    role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                                    <div class="markdown">
+                                        <p>Privacy Policy</p>
+                                        <p>Updated 04/28/2022</p>
+                                        <p>Qualify Medicare, LLC, a Delaware limited liability company ("Qualify
+                                            Medicare", "Qualify Medicare", "we" or "our"), is the owner and operator of
+                                            this website QualifyMedicare.com.</p>
+                                        <p>This QualifyMedicare Privacy Policy ("Privacy Policy") covers our treatment
+                                            of personal information and other information that we collect when an
+                                            end-user visitor to the Site ("User," "you" or "your"): (a) accesses or uses
+                                            the Site; (b) accesses and/or views any of the: (i) links to third-party
+                                            related resources and other information ("Third Party Links"); and/or (ii)
+                                            blog posts, text, video and/or other information pertaining to related
+                                            products and/or services made available on the Site (the "Informational
+                                            Content," and together with the Third Party Links, the "Content"); (c)
+                                            accesses the comments sections associated with the blog posts and/or other
+                                            interactive features made available on the Site ("Interactive Services");
+                                            and/or (d) utilizes the various contact forms and/or contact information
+                                            made available on the Site as a means to contact directly, or request to be
+                                            contacted by, Company and/or Company's third-party search-related product
+                                            and/or service providers and online aggregators (collectively, the "Contact
+                                            Services," and together with the Site, Content and Interactive Services, the
+                                            "Site Offerings").
+                                            Capitalized terms not defined herein shall have the meanings set forth in
+                                            the QualifyMedicare Website Terms and Conditions ("Terms and Conditions").
+                                        </p>
+                                        <p>IF YOU DO NOT AGREE TO TERMS OF THIS PRIVACY POLICY IN THEIR ENTIRETY, YOU
+                                            MAY NOT ACCESS OR OTHERWISE USE THE SITE OFFERINGS.</p>
+                                        <p>CALIFORNIA RESIDENTS - CALIFORNIA CONSUMER PRIVACY ACT DISCLOSURE
+                                            This California Consumer Privacy Act Disclosure explains how we collect,
+                                            use, disclose, and sell personal information relating to California
+                                            residents that is subject to the California Consumer Privacy Act of 2018
+                                            (“CCPA”).</p>
+                                        <p>WHAT IS PERSONAL INFORMATION?
+                                            Personal Information relating to California residents may relate to a
+                                            variety of contexts. For example, interacting with our websites, requesting
+                                            or obtaining our products or services, applying for employment with us or
+                                            are our employees, vendors, contractors or similar personnel, or visiting
+                                            our locations or facilities. The specific Personal Information that we
+                                            collect, use, disclose, and sell relating to a California resident depends
+                                            on our relationship or interaction with that individual.</p>
+                                        <p>While we implement best practices, our system may not respond to Do Not Track
+                                            requests or headers from some browsers. We may also use cookies or other
+                                            technology to deliver more relevant advertising and to link data collected
+                                            across other computers or devices that you may use.</p>
+                                        <p>CATEGORIES OF DATA WE COLLECT
+                                            In the past 12 months, we have collected the following categories of
+                                            Personal Information relating to California residents:</p>
+                                        <ol>
+                                            <li>
+                                                <p>identifiers, such as a name, email address, telephone number, postal
+                                                    address, unique personal identifiers, online identifiers, sex and
+                                                    marital status, and IP address, automotive information, and health
+                                                    information</p>
+                                            </li>
+                                            <li>
+                                                <p>protected classification characteristics under California law, such
+                                                    as veteran or military status, and financial information</p>
+                                            </li>
+                                            <li>
+                                                <p>commercial information, such as products or services obtained, or
+                                                    considered</p>
+                                            </li>
+                                            <li>
+                                                <p>internet activity, such as browsing history and search history on our
+                                                    website, electronic, visual, thermal, and similar information, such
+                                                    as call and video recordings, and email open rates</p>
+                                            </li>
+                                            <li>
+                                                <p>geolocation data such as device location</p>
+                                            </li>
+                                            <li>
+                                                <p>professional or employment-related information, such as work history
+                                                    and prior employer</p>
+                                            </li>
+                                            <li>
+                                                <p>education information, such as school and data of graduation</p>
+                                            </li>
+                                        </ol>
+                                        <p>COLLECTION, USE, DISCLOSURE, AND SALE OF PERSONAL INFORMATION
+                                            We may collect Technical Data and Personal Information from consumers who
+                                            arrive on or engage with our Sites, or other web properties we own (e.g., in
+                                            response to emails from or on our behalf).</p>
+                                        <p>We may engage service providers to perform a variety of functions, such as
+                                            verifying consumer consent, validating email addresses or phone numbers, and
+                                            other automated technical functions.</p>
+                                        <p>We require all partners, Service Providers or other third parties, to
+                                            represent and warrant to us that they have appropriately and legally
+                                            obtained the data provided to us and have the express authority to share the
+                                            data with us.</p>
+                                        <p>Purpose for Data Collection. We primarily use the data we collect to connect
+                                            consumers with Partners who can provide information about the products and
+                                            services those consumers are seeking.</p>
+                                        <p>Categories of Third Parties with Whom we Disclose Personal Data. We may share
+                                            your data with other businesses we own, service providers, and third party
+                                            websites.</p>
+                                        <p>Categories of Data Sold. We may transfer Technical Data and Provided
+                                            Attributes to Advertising partners who can provide the consumer with
+                                            information about the products and services they are seeking. We may receive
+                                            a fee for the transfer of that data or when the consumer purchases a product
+                                            or service.</p>
+                                        <p>In the past 12 months, we have disclosed or sold the following categories of
+                                            Personal Information relating to California residents to affiliated and
+                                            nonaffiliated third parties for our business purposes:</p>
+                                        <ol>
+                                            <li>
+                                                <p>identifiers, such as a name, email address, telephone number, postal
+                                                    address, unique personal identifiers, online identifiers, sex and
+                                                    marital status, and IP address, automotive information, and health
+                                                    information</p>
+                                            </li>
+                                            <li>
+                                                <p>protected classification characteristics under California law, such
+                                                    as veteran or military status, and financial information</p>
+                                            </li>
+                                            <li>
+                                                <p>commercial information, such as products or services obtained, or
+                                                    considered</p>
+                                            </li>
+                                            <li>
+                                                <p>internet activity, such as browsing history and search history on our
+                                                    website, electronic, visual, thermal, and similar information, such
+                                                    as call and video recordings, and email open rates</p>
+                                            </li>
+                                            <li>
+                                                <p>geolocation data such as device location</p>
+                                            </li>
+                                            <li>
+                                                <p>professional or employment-related information, such as work history
+                                                    and prior employer</p>
+                                            </li>
+                                            <li>
+                                                <p>education information, such as school and data of graduation</p>
+                                            </li>
+                                        </ol>
+                                        <p>CCPA RIGHTS
+                                            The CCPA affords certain rights and protections to California residents
+                                            including:</p>
+                                        <ol>
+                                            <li>
+                                                <p>the right to request that we delete any “personal information” that
+                                                    we have collected from you (“Right to Delete”);</p>
+                                            </li>
+                                            <li>
+                                                <p>the right to request that we disclose the categories and/or specific
+                                                    pieces of personal information collected and sold (“Right to Know”);
+                                                    and</p>
+                                            </li>
+                                            <li>
+                                                <p>the right to direct us not to sell their “personal information”
+                                                    (“Right to Opt-Out”).</p>
+                                            </li>
+                                        </ol>
+                                        <p>CCPA REQUESTS
+                                            "Personal information" is defined under the CCPA as “information that
+                                            identifies, relates to, describes, is reasonably capable of being associated
+                                            with, or could reasonably be linked, directly or indirectly, with a
+                                            particular consumer or household.”</p>
+                                        <p>California residents who would like to submit a Request to Know, Delete, or
+                                            Opt-Out should follow the link below. You may also submit a request by
+                                            calling us at number (720) 307-1777. Upon submission, you will be asked to
+                                            verify your email address. If we are able to verify your Request to Know,
+                                            Delete, or Opt-Out (e.g., that you are a California resident and that we
+                                            have or have sold, as the case may be, your “personal information”), we will
+                                            respond within 45 days of your submission (or such additional time period as
+                                            the law allows us).</p>
+                                        <p>If you would like to exercise your California CCPA rights, click here.</p>
+                                        <p>You may also opt-out of the sale of your Personal Information by clicking the
+                                            “Do Not Sell” link located on each webpage where Personal Information is
+                                            collected.</p>
+                                        <p>CHANGES TO THIS CALIFORNIA CONSUMER PRIVACY ACT DISCLOSURE
+                                            We may change or update this Disclosure without notice. We will post the
+                                            revised Disclosure on this page with a new “Last Updated” date.</p>
+                                        <p>PERSONAL INFORMATION COLLECTED
+                                            For the purposes of this Privacy Policy, "personal information" shall mean
+                                            individually identifiable information from or about an individual. We
+                                            collect personal information when you access certain of the Site Offerings
+                                            and complete the required information request form and/or otherwise provide
+                                            such information to us. Where a User attempts to utilize the Contact
+                                            Services, that User may be required to submit, and Company may collect, some
+                                            or all of the following information: (a) the User's e-mail address; (b) the
+                                            User's full name; (c) the User's telephone number; (d) certain information
+                                            pertaining to the User's desired job/career; (e) certain information
+                                            pertaining to the User's job qualifications, including professional
+                                            experience and education; and (f) any other information collected via the
+                                            Contact Services form. Upon entering Contact Data and clicking on the
+                                            applicable submission button on the Site: (i) Company may pass your Contact
+                                            Data along to one (1) or more of its partners; and (ii) you may be contacted
+                                            by Company and/or one (1) or more of its partners regarding your request.
+                                            Where Company contacts you in connection with your submission of Contact
+                                            Data, a Company representative may request additional information over the
+                                            telephone including some or all of the following: (A) User date of birth;
+                                            (B) User mailing address; (C) certain information pertaining to the User's
+                                            desired result; and (E) any other information requested by the applicable
+                                            Company representative.</p>
+                                        <p>USE OF PERSONAL INFORMATION</p>
+                                        <ol>
+                                            <li>
+                                                <p>We will not share your personal information with any third party,
+                                                    including with advertising, measurement or analytics partners unless
+                                                    you provide your permission. By submitting your personal information
+                                                    by and through the Site Offerings, and providing your permission,
+                                                    you agree that we may share, sell, rent, lease or otherwise provide
+                                                    that personal information to any third party for any purpose
+                                                    permitted by law, and we may work with other businesses to bring
+                                                    selected retail opportunities to our Users. These businesses and
+                                                    third parties may include, but are not limited to: (a) providers of
+                                                    direct marketing services and applications, including lookup and
+                                                    reference, data enhancement, suppression and validation; (b)
+                                                    telemarketers (where permitted by applicable law); and (c) direct
+                                                    marketers. Email addresses will not be shared with other senders
+                                                    without a separate opt-in process for each sender. When you provide
+                                                    your permission, we will also use your personal information to send
+                                                    you promotional messages regarding various Company products and/or
+                                                    services, as well as third party products and/or services that we
+                                                    think may be of interest to you.</p>
+                                            </li>
+                                            <li>
+                                                <p>Where you submit personal information, we use the personal
+                                                    information that you make available to personalize your experience
+                                                    with the Site and to facilitate the delivery of the applicable Site
+                                                    Offerings to you, including to respond to any inquiries made by you.
+                                                    You also agree that with your permission, we may contact you at any
+                                                    time with updates and/or any other information that we may deem
+                                                    appropriate for you to receive in connection with your continued use
+                                                    of the Site Offerings, and to keep you informed of our other
+                                                    products and services. We may also employ other companies and
+                                                    individuals to perform certain functions on our behalf. Examples
+                                                    include sending direct and electronic mail, removing duplicate
+                                                    information from User lists, analyzing data and providing marketing
+                                                    analysis. The agents performing these limited functions on our
+                                                    behalf shall have access to our Users' personal information as
+                                                    needed to perform these functions for us, but we do not permit them
+                                                    to use User personal information for other purposes.</p>
+                                            </li>
+                                            <li>
+                                                <p>We will also use your personal information with your permission, for
+                                                    customer service, to provide you with information that you may
+                                                    request, to customize your experience with the Site Offerings and/or
+                                                    to contact you when necessary in connection with your use of the
+                                                    Site Offerings. We may also use your personal information for
+                                                    internal business purposes, such as analyzing and managing our
+                                                    service offerings including, without limitation, the Site Offerings.
+                                                    We may also combine the information we have gathered about you with
+                                                    information from other sources.</p>
+                                            </li>
+                                            <li>
+                                                <p>By submitting your personal information by and through the Site
+                                                    Offerings, and thereby providing your permission, you agree that
+                                                    such act constitutes an inquiry and/or application for purposes of
+                                                    the Amended Telemarketing Sales Rule (16 CFR 310 et seq.), as
+                                                    amended from time to time (the "Rule") and applicable state
+                                                    do-not-call regulations. As such, notwithstanding that your
+                                                    telephone number may be listed on the Federal Trade Commission's
+                                                    Do-Not-Call List, and/or on applicable state do-not-call lists, with
+                                                    your permission, we retain the right to contact you via
+                                                    telemarketing in accordance with the Rule and applicable state
+                                                    do-not-call regulations.</p>
+                                            </li>
+                                            <li>
+                                                <p>Where you provide "prior express written consent" within the meaning
+                                                    of the Telephone Consumer Protection Act (47 USC 227), and its
+                                                    implementing regulations adopted by the Federal Communications
+                                                    Commission (47 CFR 64.1200), as amended from time-to-time ("TCPA"),
+                                                    you consent to receive telephone calls, including artificial voice
+                                                    calls, pre-recorded messages and/or calls (including SMS text
+                                                    messages) delivered via automated technology from “Qualify Medicare”
+                                                    or “Qualified Medicare”, to the telephone number(s) that you
+                                                    provided. This communication frequency may vary and you may receive
+                                                    up to 4 messages per month. Please note that you are not required to
+                                                    respond or to provide this consent in order to obtain access to the
+                                                    Site Offerings, and your consent simply allows Company to contact
+                                                    you via these means. Message and data rates may apply. You may Text
+                                                    STOP to cancel at anytime. If you have questions pertaining to these
+                                                    forms of communication please contact customer care at <a
+                                                        href="mailto:admin@gmail.com">admin@gmail.com</a>
+                                                    or mail us at the address below.</p>
+                                            </li>
+                                            <li>
+                                                <p>Please be advised that by agreeing to this Privacy Policy, you are
+                                                    obligated to immediately inform us if and when the telephone number
+                                                    that you have previously provided to us changes. Without limiting
+                                                    the foregoing, if you: (i) have your telephone number reassigned to
+                                                    another person or entity; (ii) give up your telephone number so that
+                                                    it is no longer used by you; (iii) port your telephone number to a
+                                                    landline or vice versa; or (iv) otherwise stop using that telephone
+                                                    number for any reason (collectively "Phone Number Change"), you
+                                                    agree that you shall promptly notify Company of the Phone Number
+                                                    Change via e-mail at:
+
+                                                    <!-- send mail to admin -->
+                                                    <a href="mailto:admin@gmail.com">admin@gmail.com</a>,
+                                                    or by using one of the methods set forth in the "Contact Us" section
+                                                    below.
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <p>We reserve the right to release current or past personal information:
+                                                    (A) in the event that we believe that the Site Offerings are being
+                                                    or have been used in violation of the Terms and Conditions or to
+                                                    commit unlawful acts; (B) if the information is subpoenaed;
+                                                    provided, however, that, where permitted by applicable law, we shall
+                                                    provide you with e-mail notice, and opportunity to challenge the
+                                                    subpoena, prior to disclosure of any personal information pursuant
+                                                    to a subpoena; or (C) if we are sold, merge with a third party, are
+                                                    acquired or are the subject of bankruptcy proceedings; provided,
+                                                    however, that if Company is involved in a bankruptcy proceeding,
+                                                    merger, acquisition or sale of all or a portion of its assets, you
+                                                    will be notified via email and/or a prominent notice on the Site of
+                                                    any change in ownership or uses of your personal information, as
+                                                    well as any choices that you may have regarding your personal
+                                                    information.</p>
+                                            </li>
+                                            <li>
+                                                <p>You hereby consent to the disclosure of any record or communication
+                                                    to any third-party when we, in our sole discretion, determine the
+                                                    disclosure to be appropriate including, without limitation, sharing
+                                                    your e-mail address with third-parties for suppression purposes in
+                                                    compliance with applicable law, including the CAN-SPAM Act of 2003,
+                                                    as amended from time to time. Users should also be aware that courts
+                                                    of equity, such as U.S. Bankruptcy Courts, might have the authority
+                                                    under certain circumstances to permit personal information to be
+                                                    shared or transferred to third parties without permission.</p>
+                                            </li>
+                                        </ol>
+                                        <p>NON-PERSONAL INFORMATION COLLECTION AND USE
+                                            IP Addresses/Browser Type -We may collect certain non-personally
+                                            identifiable information about you and your desktop computer and/or mobile
+                                            device when you visit many of the pages of the Site. This non-personally
+                                            identifiable information includes, without limitation, the type of browser
+                                            that you use (e.g., Safari, Chrome, Internet Explorer), your IP address, the
+                                            type of operating system that you use (e.g., Windows or iOS) and the domain
+                                            name of your Internet service provider (e.g., Verizon, AT&amp;T). We use the
+                                            non-personally identifiable information that we collect to improve the
+                                            design and content of the Site Offerings and to enable us to personalize
+                                            your Internet experience. We also may use this information in the aggregate
+                                            to analyze usage of the Site Offerings.</p>
+                                        <p>Cookies -When a User visits the Site, we send one (1) or more cookies and/or
+                                            gif files (collectively, "Cookies") to assign an anonymous, unique
+                                            identifier to the applicable User's computer. A Cookie is a piece of data
+                                            stored on your hard drive containing non-personally identifiable information
+                                            about you. Cookies have many benefits to enhance your experience at the
+                                            Site. To find out more about Cookies, please visit <a
+                                                href="HTTP://COOKIECENTRAL.COM">HTTP://COOKIECENTRAL.COM</a>. We use
+                                            Cookies to improve the quality of the Site Offerings, including for storing
+                                            User preferences and tracking Site-User trends (such as pages opened and
+                                            length of stay at the Site).</p>
+                                        <p>Most Internet browsers are initially set up to accept Cookies, but you can
+                                            reset your browser to refuse all Cookies or to indicate when a Cookie is
+                                            being sent. To disable and reject certain Cookies, follow the instructions
+                                            associated with your Internet browser. Even in the case where a User rejects
+                                            a Cookie, he or she may still use the Site Offerings; provided, however,
+                                            that certain functions of the Site Offerings may be impaired or rendered
+                                            inoperable if the use of Cookies is disabled. We reserve the right to retain
+                                            Cookie data indefinitely.</p>
+                                        <p>If you engage in any interaction with the Site, Company and its third party
+                                            partners may use data collected from the Site for purposes of ad delivery
+                                            and measurement purposes. Nevertheless, most Internet browsers contain a
+                                            "do-not-track" setting. In general, when a "do-not-track" setting is active,
+                                            the end-user's Internet browser notifies other websites that the end-user
+                                            does not want his/her Information and online behavior to be tracked and
+                                            used, for example, for behavioral advertising.</p>
+                                        <p>Company reserves the right to transfer and/or sell aggregate or group data
+                                            about Users of the Site Offerings for lawful purposes. Aggregate or group
+                                            data is data that describes the demographics, usage and other
+                                            characteristics of Site Offerings Users as a group, without disclosing
+                                            personally identifiable information.</p>
+                                        <p>If you engage in any interaction with Company, other Users or any third party
+                                            via the Interactive Services, you should be aware that the personal
+                                            information that you submit by and through the Interactive Services can be
+                                            read, collected and/or used by other Users of these services, and could be
+                                            used to send you unsolicited messages or otherwise to contact you without
+                                            your consent or desire. We are not responsible for the personal information
+                                            that you choose to submit via the Interactive Services.</p>
+                                        <p>THIRD-PARTY WEBSITES
+                                            This Site may contain links to third-party owned and/or operated websites
+                                            including, without limitation,partners. Company is not responsible for the
+                                            privacy practices or the content of such websites. In some cases, you may be
+                                            able to make a purchase through one of these third-party websites. In these
+                                            instances, you may be required to provide certain information, such as a
+                                            credit card number, to register or complete a transaction at such website.
+                                            These third-party websites have separate privacy and data collection
+                                            practices and Company has no responsibility or liability relating to them.
+                                        </p>
+                                        <p>SECURITY
+                                            We endeavor to safeguard and protect our Users' personal information. When
+                                            Users make personal information available to us, their personal information
+                                            is protected both online and offline (to the extent that we maintain any
+                                            personal information offline). Where our registration/application process
+                                            prompts Users to enter sensitive information (such as financial information
+                                            or Social Security Number), and when we store and transmit such sensitive
+                                            information, that information is encrypted with advanced TLS (Transport
+                                            Layer Security).</p>
+                                        <p>Access to your personal information is strictly limited, and we take
+                                            reasonable measures to ensure that your personal information is not
+                                            accessible to the public. All of our Users' personal information is
+                                            restricted in our offices, as well as the offices of our third party service
+                                            providers. Only employees or third party agents who need User personal
+                                            information to perform a specific job are granted access to User personal
+                                            information. Our employees are dedicated to ensuring the security and
+                                            privacy of all User personal information. Employees not adhering to our firm
+                                            policies are subject to disciplinary action. The servers that we store User
+                                            personal information on are kept in a secure physical environment. We also
+                                            have security measures in place to protect the loss, misuse and alteration
+                                            of personal information under our control.</p>
+                                        <p>Please be advised, however, that while we take every reasonable precaution
+                                            available to protect your data, no storage facility, technology, software,
+                                            security protocols or data transmission over the Internet or via wireless
+                                            networks can be guaranteed to be 100% secure. Computer hackers that
+                                            circumvent our security measures may gain access to certain portions of your
+                                            personal information, and technological bugs, errors and glitches may cause
+                                            inadvertent disclosures of your personal information; provided, however,
+                                            that any attempt to breach the security of the network, our servers,
+                                            databases or other hardware or software may constitute a crime punishable by
+                                            law. For the reasons mentioned above, we cannot warrant that your personal
+                                            information will be absolutely secure. Any transmission of data at or
+                                            through the Site, other Site Offerings or otherwise via the Internet or
+                                            wireless networks, is done at your own risk.</p>
+                                        <p>In compliance with applicable federal and state laws, we shall notify you and
+                                            any applicable regulatory agencies in the event that we learn of an
+                                            information security breach with respect to your personal information. You
+                                            will be notified via e-mail in the event of such a breach. Please be advised
+                                            that notice may be delayed in order to address the needs of law enforcement,
+                                            determine the scope of network damage, and to engage in remedial measures.
+                                        </p>
+                                        <p>MINORS
+                                            Visitors under eighteen (18) years of age are not permitted to use and/or
+                                            submit their personal information at the Site. Company does not knowingly
+                                            solicit or collect information from visitors under eighteen (18) years of
+                                            age. Company encourages parents and guardians to spend time online with
+                                            their children and to participate and monitor the interactive activities of
+                                            their children.</p>
+                                        <p>OPT-OUT/UNSUBSCRIBE
+                                            To opt-out of receiving e-mail and other forms of communications from us,
+                                            you can: (a) follow the instructions included in the applicable e-mail
+                                            message or other communication; or (b) e-mail us at:
+
+                                            <!-- sending mail to admin -->
+                                            <a href="mailto:admin@gmail.com">admin@gmail.com</a>.
+                                            Notwithstanding the foregoing, we may continue to contact you for the
+                                            purpose of communicating information relating to your request for Site
+                                            Offerings, as well as to respond to any inquiry or request made by you. To
+                                            opt-out of receiving Site Offerings-related and/or inquiry response-related
+                                            messages from Company, you must cease requesting and/or utilizing the Site
+                                            Offerings and/or cease submitting inquiries to Company, as applicable.
+                                        </p>
+                                        <p>DELETING, MODIFYING AND UPDATING YOUR INFORMATION
+                                            At your request, we will: (a) inform you of what personal information we
+                                            have on file for you; (b) amend the personal information that we have on
+                                            file for you; and/or (c) remove personal information that you have provided
+                                            to us, or that we have collected. You may do so by e-mailing us at:
+                                            <!-- sending mail to admin -->
+                                            <a href="mailto:admin@gmail.com">admin@gmail.com</a>.
+                                            We ask individual Users to identify themselves and the information requested
+                                            to be accessed, corrected or removed before processing such requests, and,
+                                            to the extent permitted by applicable law, we may decline to process
+                                            requests that are unreasonably repetitive or systematic, require
+                                            disproportionate technical effort, jeopardize the privacy of others or would
+                                            be extremely impractical (for instance, requests concerning information
+                                            residing on backup tapes).
+                                        </p>
+                                        <p>Please be advised that deleting your personal information may terminate your
+                                            access to certain of the Site Offerings. If you wish to continue using the
+                                            full complement of Site Offerings, you may not be able to delete all of the
+                                            personal information that we have on file for you.</p>
+                                        <p>Please be further advised that, after you delete your personal information,
+                                            residual copies may take a period of time before they are deleted from our
+                                            active servers and may remain in our backup systems.</p>
+                                        <p>TRANSFER OF PERSONAL INFORMATION INTERNATIONALLY
+                                            If you are visiting the Site from a country other than the country in which
+                                            our servers are located, your communications with us may result in the
+                                            transfer of information across international boundaries. By visiting the
+                                            Site and/or otherwise communicating electronically with us, you consent to
+                                            such transfers. Even if your jurisdiction does not have the same privacy
+                                            laws as the jurisdiction where our servers are located, we will treat your
+                                            information as subject to the protections described in this Privacy Policy.
+                                        </p>
+                                        <p>CHANGES TO THIS PRIVACY POLICY
+                                            Company reserves the right to change or update this Privacy Policy at any
+                                            time by posting a notice on the Site that we are changing our Privacy
+                                            Policy. If the manner in which we use personal information changes, Company
+                                            will notify Users by: (a) sending the modified policy to our Users via
+                                            email; and/or (b) by any other reasonable means acceptable under applicable
+                                            state and federal law. You will have a choice as to whether or not we use
+                                            your information in this different manner and we will only use your
+                                            information in this different manner where you opt-in to such use.</p>
+                                        <p>CONTACT US
+                                            If you have any questions about this Privacy Policy or our privacy practices
+                                            in general, you may email us as at:
+
+                                            <!-- send mail to admin -->
+                                            <a href="mailto:admin@gmail.com">admin@gmail.com</a> ;
+                                            or send us mail to: 1968 S. Coast Hwy #1156, Laguna Beach; CA 92651.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!----><!----><!---->
-                    <div class="cursor-pointer text-gray-500 hover:text-gray-900 px-2 md:px-5 py-2">Terms of Use
+
+                    <div id="nav-item-2" class="cursor-pointer text-gray-500 hover:text-gray-900 px-2 md:px-5 py-2">
+                        Terms of Use
                     </div>
+
+                    <!-- popup modal 2 html -->
+                    <div id="modal-2" class="modal">
+                        <div class="fixed z-10 inset-0 overflow-y-auto">
+                            <div
+                                class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                <div class="fixed inset-0 transition-opacity">
+                                    <div class="absolute inset-0 bg-black opacity-75"></div>
+                                    <div class="close fixed top-0 right-0 p-3">
+                                        <div
+                                            class="p-3 cursor-pointer rounded-full transition ease-in-out duration-150 hover:bg-gray-800">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                                                class="w-6 h-6 text-gray-200 iconify iconify--mdi" width="1em"
+                                                height="1em" viewBox="0 0 24 24">
+                                                <path fill="currentColor"
+                                                    d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div><span class="hidden sm:inline-block sm:align-middle sm:h-screen">&nbsp;</span>
+                                <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:p-6 sm:max-w-4xl"
+                                    role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                                    <div class="markdown">
+                                        <p>Terms of Use</p>
+                                        <p>Updated 03/28/2022</p>
+                                        <p>CLIENTS
+                                            By using the Internet site located at QualifyMedicare (the "Site") or
+                                            any
+                                            services provided in connection with the Site (the "Service"), you agree
+                                            to
+                                            abide by these Terms of Use, as they may be amended by Qualify Medicare
+                                            (the
+                                            "Company"), from time to time in its sole discretion. Company will post
+                                            a
+                                            notice on the Site any time these Terms of Use have been changed or
+                                            otherwise updated. It is your responsibility to review these Terms of
+                                            Use
+                                            periodically, and if at any time you find these Terms of Use
+                                            unacceptable,
+                                            you must immediately leave the Site and cease all use of the Service and
+                                            the
+                                            Site.</p>
+                                        <p>BY USING THIS SITE YOU REPRESENT THAT YOU ARE AT LEAST 18 YEARS OLD AND
+                                            THAT
+                                            YOU ARE LEGALLY ABLE TO ENTER INTO THIS AGREEMENT.</p>
+                                        <p>PRIVACY POLICY.
+                                            The Company respects your privacy. A complete statement of Company's
+                                            current
+                                            privacy policy can be found on the bottom of QualifyMedicare. The
+                                            Company's
+                                            privacy policy is expressly incorporated into this Agreement by this
+                                            reference. By providing information to Company through the Site of
+                                            Services,
+                                            you provide your affirmative consent that Company may collect, use, and
+                                            disclose any information submitted or collected through the Site or
+                                            Services, that Company may contact you via any contact method you
+                                            provide,
+                                            including email and telephone, that Company may disclose your contact
+                                            information to third-parties, and that such third-parties may contact
+                                            you
+                                            via commercial email, telephone, or any other communication method.</p>
+                                        <p>REGISTRATION.
+                                            If you are required to open an account to use or access the Site or
+                                            Service,
+                                            you must complete the registration process by providing the complete and
+                                            accurate information requested on the registration form. You will also
+                                            be
+                                            asked to provide a user name and password. You are entirely responsible
+                                            for
+                                            maintaining the confidentiality of your password. You may not use the
+                                            account, username, or password of someone else at any time. You agree to
+                                            notify Company immediately on any unauthorized use of your account, user
+                                            name, or password. Company shall not be liable for any loss that you
+                                            incur
+                                            as a result of someone else using your password, either with or without
+                                            your
+                                            knowledge. You may be held liable for any losses incurred by Company,
+                                            its
+                                            affiliates, officers, directors, employees, consultants, agents, and
+                                            representatives due to someone else's use of your account or password.
+                                        </p>
+                                        <p>COMPLIANCE WITH INTELLECTUAL PROPERTY LAWS.
+                                            When accessing the Site or using the Service, you agree to obey the law
+                                            and
+                                            to respect the intellectual property rights of others. Your use of the
+                                            Service and the Site is at all times governed by and subject to laws
+                                            regarding copyright ownership and use of intellectual property. You
+                                            agree
+                                            not to upload, download, display, perform, transmit, or otherwise
+                                            distribute
+                                            any information or content (collectively, "Content") in violation of any
+                                            third party's copyrights, trademarks, or other intellectual property or
+                                            proprietary rights. You agree to abide by laws regarding copyright
+                                            ownership
+                                            and use of intellectual property, and you shall be solely responsible
+                                            for
+                                            any violations of any relevant laws and for any infringements of third
+                                            party
+                                            rights caused by any Content you provide or transmit, or that is
+                                            provided or
+                                            transmitted using your User ID. The burden of proving that any Content
+                                            does
+                                            not violate any laws or third party rights rests solely with you.</p>
+                                        <p>NO LICENSE.
+                                            Nothing contained on the Site should be understood as granting you a
+                                            license
+                                            to use any of the trademarks, service marks, or logos owned by Company
+                                            or by
+                                            any third party.</p>
+                                        <p>ALLEGED VIOLATIONS.
+                                            Company reserves the right to terminate your use of the Service and/or
+                                            the
+                                            Site. To ensure that Company provides a high quality experience for you
+                                            and
+                                            for other users of the Site and the Service, you agree that Company or
+                                            its
+                                            representatives may access your account and records on a case-by-case
+                                            basis
+                                            to investigate complaints or allegations of abuse, infringement of third
+                                            party rights, or other unauthorized uses of the Site or the Service.
+                                            Company
+                                            does not intend to disclose the existence or occurrence of such an
+                                            investigation unless required by law, but Company reserves the right to
+                                            terminate your account or your access to the Site immediately, with or
+                                            without notice to you, and without liability to you, if Company believes
+                                            that you have violated any of the Terms of Use, furnished Company with
+                                            false
+                                            or misleading information, or interfered with use of the Site or the
+                                            Service
+                                            by others.</p>
+                                        <p>NO WARRANTIES. COMPANY HEREBY DISCLAIMS ALL WARRANTIES. COMPANY IS MAKING
+                                            THE
+                                            SITE AVAILABLE "AS IS" WITHOUT WARRANTY OF ANY KIND. YOU ASSUME THE RISK
+                                            OF
+                                            ANY AND ALL DAMAGE OR LOSS FROM USE OF, OR INABILITY TO USE, THE SITE OR
+                                            THE
+                                            SERVICE. TO THE MAXIMUM EXTENT PERMITTED BY LAW, COMPANY EXPRESSLY
+                                            DISCLAIMS
+                                            ANY AND ALL WARRANTIES, EXPRESS OR IMPLIED, REGARDING THE SITE,
+                                            INCLUDING,
+                                            BUT NOT LIMITED TO, ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS
+                                            FOR A
+                                            PARTICULAR PURPOSE, OR NONINFRINGEMENT. COMPANY DOES NOT WARRANT THAT
+                                            THE
+                                            SITE OR THE SERVICE WILL MEET YOUR REQUIREMENTS OR THAT THE OPERATION OF
+                                            THE
+                                            SITE OR THE SERVICE WILL BE UNINTERRUPTED OR ERROR-FREE.</p>
+                                        <p>LIMITED LIABILITY. COMPANY'S LIABILITY TO YOU IS LIMITED. TO THE MAXIMUM
+                                            EXTENT PERMITTED BY LAW, IN NO EVENT SHALL COMPANY BE LIABLE FOR DAMAGES
+                                            OF
+                                            ANY KIND (INCLUDING, BUT NOT LIMITED TO, SPECIAL, INCIDENTAL, OR
+                                            CONSEQUENTIAL DAMAGES, LOST PROFITS, OR LOST DATA, REGARDLESS OF THE
+                                            FORESEEABILITY OF THOSE DAMAGES) ARISING OUT OF OR IN CONNECTION WITH
+                                            YOUR
+                                            USE OF THE SITE OR ANY OTHER MATERIALS OR SERVICES PROVIDED TO YOU BY
+                                            COMPANY. This limitation shall apply regardless of whether the damages
+                                            arise
+                                            out of breach of contract, tort, or any other legal theory or form of
+                                            action.</p>
+                                        <p>AFFILIATED SITES.
+                                            Company has no control over, and no liability for any third party
+                                            websites
+                                            or materials. Company works with a number of partners and affiliates
+                                            whose
+                                            Internet sites may be linked with the Site. Because neither Company nor
+                                            the
+                                            Site has control over the content and performance of these partner and
+                                            affiliate sites; Company makes no guarantees about the accuracy,
+                                            currency,
+                                            content, or quality of the information provided by such sites, and
+                                            Company
+                                            assumes no responsibility for unintended, objectionable, inaccurate,
+                                            misleading, or unlawful content that may reside on those sites.
+                                            Similarly,
+                                            from time to time in connection with your use of the Site, you may have
+                                            access to content items (including, but not limited to, websites) that
+                                            are
+                                            owned by third parties. You acknowledge and agree that Company makes no
+                                            guarantees about, and is not responsible for, the accuracy, currency,
+                                            content, or quality of any services or downloads you receive from a
+                                            third
+                                            party, and that, Company is not affiliated with any third party that you
+                                            may
+                                            link to through this site. You expressly agree to indemnify Company from
+                                            any
+                                            claims you may have against a third party that you linked to or accessed
+                                            via
+                                            Company's website.</p>
+                                        <p>PROHIBITED USES.
+                                            Company imposes certain restrictions on your permissible use of the Site
+                                            and
+                                            the Service. You are prohibited from violating or attempting to violate
+                                            any
+                                            security features of the Site or Service, including, without limitation,
+                                            (a)
+                                            accessing content or data not intended for you, or logging onto a server
+                                            or
+                                            account that you are not authorized to access; (b) attempting to probe,
+                                            scan, or test the vulnerability of the Service, the Site, or any
+                                            associated
+                                            system or network, or to breach security or authentication measures
+                                            without
+                                            proper authorization; (c) interfering or attempting to interfere with
+                                            service to any user, host, or network, including, without limitation, by
+                                            means of submitting a virus to the Site or Service, overloading,
+                                            "flooding,"
+                                            "spamming," "mail bombing," or "crashing;" (d) using the Site or Service
+                                            to
+                                            send unsolicited e-mail, including, without limitation, promotions, or
+                                            advertisements for products or services; (e) forging any TCP/IP packet
+                                            header or any part of the header information in any e-mail or in any
+                                            posting
+                                            using the Service; or (f) attempting to modify, reverse-engineer,
+                                            decompile,
+                                            disassemble, or otherwise reduce or attempt to reduce to a
+                                            human-perceivable
+                                            form any of the source code used by Company in providing the Site or
+                                            Service. Any violation of system or network security may subject you to
+                                            civil and/or criminal liability.</p>
+                                        <p>INDEMNITY.
+                                            You agree to indemnify Company for certain of your acts and omissions.
+                                            You
+                                            agree to indemnify, defend, and hold harmless Company, its affiliates,
+                                            officers, directors, employees, consultants, agents, and representatives
+                                            from any and all third party claims, losses, liability, damages, and/or
+                                            costs (including reasonable attorney fees and costs) arising from your
+                                            access to or use of the Site, your violation of these Terms of Use, or
+                                            your
+                                            infringement, or infringement by any other user of your account, of any
+                                            intellectual property or other right of any person or entity. Company
+                                            will
+                                            notify you promptly of any such claim, loss, liability, or demand, and
+                                            will
+                                            provide you with reasonable assistance, at your expense, in defending
+                                            any
+                                            such claim, loss, liability, damage, or cost.</p>
+                                        <p>COPYRIGHT.
+                                            All contents of Site or Service are: Copyright © 2021 QualifyMedicare.
+                                            All
+                                            rights reserved.</p>
+                                        <p>GOVERNING LAW.
+                                            These Terms of Use shall be construed in accordance with and governed by
+                                            the
+                                            laws of the State of California without reference to their rules
+                                            regarding
+                                            conflicts of law. You hereby irrevocably consent to the exclusive
+                                            jurisdiction of the courts of the State of California, United States,
+                                            for
+                                            all disputes arising out of or related to the use of the Site or
+                                            Service.
+                                        </p>
+                                        <p>SEVERABILITY; WAIVER.
+                                            If, for whatever reason, a court of competent jurisdiction finds any
+                                            term or
+                                            condition in these Terms of Use to be unenforceable, all other terms and
+                                            conditions will remain unaffected and in full force and effect. No
+                                            waiver of
+                                            any breach of any provision of these Terms of Use shall constitute a
+                                            waiver
+                                            of any prior, concurrent, or subsequent breach of the same or any other
+                                            provisions hereof, and no waiver shall be effective unless made in
+                                            writing
+                                            and signed by an authorized representative of the waiving party.</p>
+                                        <p>ARBITRATION AGREEMENT
+                                            Any dispute or claim relating in any way to your use of this website,
+                                            including any related calls texts or other communications, will be
+                                            resolved
+                                            by binding arbitration, rather than in court, except that you may assert
+                                            claims in small claims court if your claims qualify. This includes
+                                            claims
+                                            against our clients, vendors, and Marketing Partners, which are third
+                                            party
+                                            beneficiaries of this arbitration agreement. The Federal Arbitration Act
+                                            and
+                                            federal arbitration law apply to this agreement.</p>
+                                        <p>There is no judge or jury in arbitration, and court review of an
+                                            arbitration
+                                            award is limited. However, an arbitrator can award on an individual
+                                            basis
+                                            the same damages and relief as a court (including injunctive and
+                                            declaratory
+                                            relief or statutory damages), and must follow the terms of these terms
+                                            as a
+                                            court would.</p>
+                                        <p>The arbitration may be conducted by the American Arbitration Association
+                                            (AAA) under its rules, including the AAA's Supplementary Procedures for
+                                            Consumer-Related Disputes. The AAA's rules are available at <a
+                                                href="http://www.adr.org">www.adr.org</a> or by calling
+                                            1-800-778-7879.
+                                            You may choose to have the arbitration conducted by telephone, based on
+                                            written submissions, or in person in the county where you live or at
+                                            another
+                                            mutually agreed location.</p>
+                                        <p>We each agree that any dispute resolution proceedings will be conducted
+                                            only
+                                            on an individual basis and not in a class, consolidated or
+                                            representative
+                                            action. If for any reason a claim proceeds in court rather than in
+                                            arbitration we each waive any right to a jury trial. We also both agree
+                                            that
+                                            you or we may bring suit in court to enjoin infringement or other misuse
+                                            of
+                                            intellectual property rights.</p>
+                                        <p>MODIFICATIONS.
+                                            Company may, in its sole discretion and without prior notice, (a) revise
+                                            these Terms of Use; (b) modify the Site and/or the Service; and (c)
+                                            discontinue the Site and/or Service at any time. Company shall post any
+                                            revision to these Terms of Use to the Site, and the revision shall be
+                                            effective immediately on such posting. You agree to review these Terms
+                                            of
+                                            Use and other online policies posted on the Site periodically to be
+                                            aware of
+                                            any revisions. You agree that, by continuing to use or access the Site
+                                            following notice of any revision, you shall abide by any such revision.
+                                        </p>
+                                        <p>ACKNOWLEDGEMENT. BY USING THE SERVICE OR ACCESSING THE SITE, YOU
+                                            ACKNOWLEDGE
+                                            THAT YOU HAVE READ THESE TERMS OF USE AND AGREE TO BE BOUND BY THEM.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!----><!----><!---->
-                    <div class="cursor-pointer text-gray-500 hover:text-gray-900 px-2 md:px-5 py-2"> Contact Us
+                    <div id="nav-item-3" class="cursor-pointer text-gray-500 hover:text-gray-900 px-2 md:px-5 py-2">
+                        Contact Us
                     </div>
+
+                    <!-- popup modal 3 html -->
+                    <div id="modal-3" class="modal">
+
+                        <!-- popup modal 3 html -->
+                        <div class="fixed z-10 inset-0 overflow-y-auto">
+                            <div
+                                class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                <div class="fixed inset-0 transition-opacity">
+                                    <div class="absolute inset-0 bg-black opacity-75"></div>
+                                    <div class="close fixed top-0 right-0 p-3">
+                                        <div
+                                            class="p-3 cursor-pointer rounded-full transition ease-in-out duration-150 hover:bg-gray-800">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                                                class="w-6 h-6 text-gray-200 iconify iconify--mdi" width="1em"
+                                                height="1em" viewBox="0 0 24 24">
+                                                <path fill="currentColor"
+                                                    d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div><span class="hidden sm:inline-block sm:align-middle sm:h-screen">&nbsp;</span>
+                                <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:p-6 sm:max-w-lg"
+                                    role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                                    <div class="max-w-md mx-auto">
+                                        <h1 class="text-lg text-center font-semibold"> How can we help you? </h1>
+                                        <p class="py-6 text-justify"> Let's get you the answers you need. Just let
+                                            us
+                                            know
+                                            how we can help
+                                            and one of our friendly customer care specialists will get right back to
+                                            you.
+                                        </p>
+                                        <div class="flex flex-col space-y-4"><label>
+                                                <div class="mb-2"><label class="font-medium text-gray-700">Reason
+                                                        for
+                                                        your
+                                                        enquiry</label>
+                                                </div><select name="reason"
+                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full border-gray-300 rounded-md py-4 text-gray-500 text-base">
+                                                    <option disabled="">Select an option</option>
+                                                    <option value="do_not_contact">Do Not Contact</option>
+                                                    <option value="customer_service_enquiry">Customer Service
+                                                        Enquiry
+                                                    </option>
+                                                    <option value="business_enquiry">Business Enquiry</option>
+                                                </select>
+                                            </label>
+                                            <div class="flex rounded-md shadow-sm" data-v-e1172df5="">
+                                                <div class="relative flex-1" data-v-e1172df5=""><input
+                                                        id="input-subject" type="text" placeholder=" " name="subject"
+                                                        class="rounded-l-md pt-6 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-r-md peer bg-white"
+                                                        inputmode="text" data-v-e1172df5=""><label for="input-subject"
+                                                        class="translate-y-[18px] translate-x-[16px] absolute top-0 pointer-events-none origin-top-left text-gray-500 whitespace-nowrap transition-transform duration-200 peer-focus:translate-y-[8px] peer-focus:translate-x-[12px] peer-focus:scale-[0.8]"
+                                                        data-v-e1172df5="">Subject</label></div>
+                                            </div>
+                                            <div class="flex rounded-md shadow-sm" data-v-e1172df5="">
+                                                <div class="relative flex-1" data-v-e1172df5=""><input
+                                                        id="input-firstName" type="text" placeholder=" "
+                                                        name="firstName"
+                                                        class="rounded-l-md pt-6 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-r-md peer bg-white"
+                                                        inputmode="text" data-v-e1172df5=""><label for="input-firstName"
+                                                        class="translate-y-[18px] translate-x-[16px] absolute top-0 pointer-events-none origin-top-left text-gray-500 whitespace-nowrap transition-transform duration-200 peer-focus:translate-y-[8px] peer-focus:translate-x-[12px] peer-focus:scale-[0.8]"
+                                                        data-v-e1172df5="">First Name</label></div>
+                                            </div>
+                                            <div class="flex rounded-md shadow-sm" data-v-e1172df5="">
+                                                <div class="relative flex-1" data-v-e1172df5=""><input
+                                                        id="input-lastName" type="text" placeholder=" " name="lastName"
+                                                        class="rounded-l-md pt-6 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-r-md peer bg-white"
+                                                        inputmode="text" data-v-e1172df5=""><label for="input-lastName"
+                                                        class="translate-y-[18px] translate-x-[16px] absolute top-0 pointer-events-none origin-top-left text-gray-500 whitespace-nowrap transition-transform duration-200 peer-focus:translate-y-[8px] peer-focus:translate-x-[12px] peer-focus:scale-[0.8]"
+                                                        data-v-e1172df5="">Last Name</label></div>
+                                            </div>
+                                            <div class="flex rounded-md shadow-sm" data-v-e1172df5="">
+                                                <div class="relative flex-1" data-v-e1172df5=""><input id="input-email"
+                                                        type="email" placeholder=" " name="email"
+                                                        class="rounded-l-md pt-6 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-r-md peer bg-white"
+                                                        inputmode="email" data-v-e1172df5=""><label for="input-email"
+                                                        class="translate-y-[18px] translate-x-[16px] absolute top-0 pointer-events-none origin-top-left text-gray-500 whitespace-nowrap transition-transform duration-200 peer-focus:translate-y-[8px] peer-focus:translate-x-[12px] peer-focus:scale-[0.8]"
+                                                        data-v-e1172df5="">Email</label></div>
+                                            </div>
+                                            <div class="flex flex-col space-y-4 w-full">
+                                                <div class="flex rounded-md shadow-sm" data-v-e1172df5="">
+                                                    <div class="relative flex-1" data-v-e1172df5=""><input
+                                                            id="input-phoneNumber" type="text" placeholder=" "
+                                                            name="phoneNumber"
+                                                            class="rounded-l-md pt-6 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-r-md peer bg-white"
+                                                            maxlength="17" minlength="17" autocomplete="phoneNumber"
+                                                            inputmode="tel" data-v-e1172df5=""
+                                                            data-mask="+1 (###) ###-####" data-mask-inited="true"
+                                                            data-mask-raw-value=""><label for="input-phoneNumber"
+                                                            class="translate-y-[18px] translate-x-[16px] absolute top-0 pointer-events-none origin-top-left text-gray-500 whitespace-nowrap transition-transform duration-200 peer-focus:translate-y-[8px] peer-focus:translate-x-[12px] peer-focus:scale-[0.8]"
+                                                            data-v-e1172df5="">Phone Number</label></div>
+                                                </div>
+                                            </div>
+                                            <div id="smart-address" class="relative">
+                                                <div id="address_wrapper" class="simple-typeahead" data-v-f81ca714="">
+                                                    <input id="address" class="simple-typeahead-input" type="text"
+                                                        placeholder="" autocomplete="off" data-v-f81ca714="">
+                                                </div>
+                                                <label for="address"
+                                                    class="translate-y-[18px] translate-x-[16px] absolute top-0 pointer-events-none origin-top-left text-gray-500 whitespace-nowrap transition-transform duration-200 peer-focus:translate-y-[8px] peer-focus:translate-x-[12px] peer-focus:scale-[0.8]">Address</label>
+                                            </div>
+                                            <div class="flex rounded-md shadow-sm" data-v-e1172df5="">
+                                                <div class="relative flex-1" data-v-e1172df5=""><textarea
+                                                        id="input-message" type="textarea" placeholder=" "
+                                                        name="message"
+                                                        class="rounded-l-md pt-6 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-r-md peer bg-white"
+                                                        inputmode="text" data-v-e1172df5=""></textarea><label
+                                                        for="input-message"
+                                                        class="translate-y-[18px] translate-x-[16px] absolute top-0 pointer-events-none origin-top-left text-gray-500 whitespace-nowrap transition-transform duration-200 peer-focus:translate-y-[8px] peer-focus:translate-x-[12px] peer-focus:scale-[0.8]"
+                                                        data-v-e1172df5="">Comments or Questions</label></div>
+                                            </div>
+                                            <button type="button"
+                                                class="relative inline-flex items-center px-4 py-2 text-sm leading-5 cursor-pointer border border-transparent font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 self-end">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- POP-UP Modal Styling -->
+                    <style>
+                        .modal {
+                            display: none;
+                            /* Hidden by default */
+                            position: fixed;
+                            /* Stay in place */
+                            z-index: 1;
+                            /* Sit on top */
+                            left: 0;
+                            top: 0;
+                            width: 100%;
+                            /* Full width */
+                            height: 100%;
+                            /* Full height */
+                            overflow: auto;
+                            /* Enable scroll if needed */
+                            background-color: rgb(0, 0, 0);
+                            /* Fallback color */
+                            background-color: rgba(0, 0, 0, 0.4);
+                            /* Black w/ opacity */
+                        }
+
+
+                        /* The Close Button */
+                        .close {
+                            color: #aaa;
+                            float: right;
+                            font-size: 28px;
+                            font-weight: bold;
+                        }
+
+                        .close:hover,
+                        .close:focus {
+                            color: black;
+                            text-decoration: none;
+                            cursor: pointer;
+                        }
+                    </style>
+
+
+                    <!-- Pop Up Javascript -->
+                    <script>
+                        // Get the modals
+                        var modal1 = document.getElementById("modal-1");
+                        var modal2 = document.getElementById("modal-2");
+                        var modal3 = document.getElementById("modal-3");
+
+                        // Get the navigation items
+                        var navItem1 = document.getElementById("nav-item-1");
+                        var navItem2 = document.getElementById("nav-item-2");
+                        var navItem3 = document.getElementById("nav-item-3");
+
+                        // When the user clicks on Navigation Item 1, open Modal 1
+                        navItem1.onclick = function () {
+                            modal1.style.display = "block";
+                            // Remove the 'flex' class from the div element
+                            var divElement = document.getElementById("remove-class");
+                            divElement.classList.remove("flex");
+                        }
+
+                        // When the user clicks on Navigation Item 2, open Modal 2
+                        navItem2.onclick = function () {
+                            modal2.style.display = "block";
+                            // Remove the 'flex' class from the div element
+                            var divElement = document.getElementById("remove-class");
+                            divElement.classList.remove("flex");
+                        }
+
+                        // When the user clicks on Navigation Item 3, open Modal 3
+                        navItem3.onclick = function () {
+                            modal3.style.display = "block";
+                            // Remove the 'flex' class from the div element
+                            var divElement = document.getElementById("remove-class");
+                            divElement.classList.remove("flex");
+                        }
+
+                        // When the user clicks on the close button, close the modal
+                        var closeButtons = document.getElementsByClassName("close");
+                        for (var i = 0; i < closeButtons.length; i++) {
+                            closeButtons[i].onclick = function () {
+                                modal1.style.display = "none";
+                                modal2.style.display = "none";
+                                modal3.style.display = "none";
+                                // var modal = this.parentElement.parentElement;
+                                // modal.style.display = "none";
+
+                            }
+                        }
+
+                        // When the user clicks anywhere outside of the modal, close it
+                        window.onclick = function (event) {
+                            if (event.target == modal1 || event.target == modal2 || event.target == modal3) {
+                                event.target.style.display = "none";
+                            }
+                        }
+
+                    </script>
+
+
                 </nav>
                 <p class="text-gray-400 md:mr-5">© 2023 QualifyMedicare, Inc. All rights reserved.</p>
             </div>
@@ -874,6 +2020,10 @@ c0.2-1.5,0.7-3,1.6-4.3c0.6-1,1.3-1.8,2.2-2.6c0,0,0.1-0.1,0.1-0.1c-1.5,0.6-2.8,1.
             </div>
         </div>
     </footer>
+
+
+
+
     <script src="index.js"></script>
 
 </body>

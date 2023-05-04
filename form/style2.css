@@ -1279,6 +1279,11 @@ select {
     margin-top: auto
 }
 
+.content-center{
+    align-content: center;
+}
+
+
 .block {
     display: block
 }
